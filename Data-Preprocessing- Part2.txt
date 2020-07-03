@@ -1,0 +1,50 @@
+# Label Encoding
+
+from sklearn.preprocessing import LabelEncoder
+label= LabelEncoder()
+dataset['Attrition']=label.fit_transform(dataset['Attrition'])
+dataset['BusinessTravel']=label.fit_transform(dataset['BusinessTravel'])
+dataset['Department']=label.fit_transform(dataset['Department'])
+dataset['Gender']=label.fit_transform(dataset['Gender'])
+dataset['MaritalStatus']=label.fit_transform(dataset['MaritalStatus'])
+dataset['OverTime']=label.fit_transform(dataset['OverTime'])
+
+#removing unwanted columns
+
+dataset=dataset.drop('EmployeeCount',axis=1)
+dataset=dataset.drop('EmployeeNumber',axis=1)
+dataset=dataset.drop('Over18',axis=1)
+dataset=dataset.drop('StandardHours',axis=1)
+
+#Moving first column to last
+
+dataset['Age_Years']=dataset['Age']
+dataset=dataset.drop('Age',axis=1)
+dataset
+
+#Splitting into dependent and independent variables
+
+x=dataset.iloc[:,1:].values
+y=dataset.iloc[:,0:1].values
+
+# OneHotEncoding
+
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+ct=ColumnTransformer([("on",OneHotEncoder(),[5])],remainder="passthrough")
+x=ct.fit_transform(x)
+x=x[:,1:]    #removing dummies
+ct=ColumnTransformer([("on",OneHotEncoder(),[15])],remainder="passthrough")
+x=ct.fit_transform(x)
+x=x[:,1:]    #removing dummies
+
+# Feature Scaling
+
+from sklearn.preprocessing import StandardScaler
+sc=StandardScaler()
+x=sc.fit_transform(x)
+
+# Splitting into train and test data
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
