@@ -1,0 +1,22 @@
+#accuracy score
+
+from sklearn.metrics import accuracy_score
+accuracy_score(y_test,y_pred)
+
+#confusion_matrix
+
+from sklearn.metrics import confusion_matrix
+cm1=confusion_matrix(y_test,y_pred)
+cm1
+
+#auc_roc
+
+import sklearn.metrics as metrics
+fpr1,tpr1,threshold1=metrics.roc_curve(y_test,y_pred)
+roc_auc1=metrics.auc(fpr1,tpr1)
+roc_auc1
+
+plt.title('Receiver Operating Characteristics')
+plt.plot(fpr1,tpr1,'b',label='AUC=%0.2f'% roc_auc1)
+plt.legend(loc='lower right')
+plt.plot()
