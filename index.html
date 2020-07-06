@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+	<meta charset="UTF-8">
+	<title>ML API</title>
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+	<style>
+		.login {
+			top: 20%;
+			height: 100%;
+		}
+		.split {
+			height: 50%;
+			width: 20%;
+			position:fixed;
+			z-index: 0;
+			top: 200px;
+			overflow-x: hidden;
+			padding-top: 20px;
+		}
+		.left {
+			left: 600px;
+			background-color: black;
+		}
+		.right {
+			right: 550px;
+			background-color: black;
+		}
+		
+	</style>
+</head>
+
+<body>
+	<div class="login">
+		<h1>Employee Attrition</h1>
+		<!-- Main Input For Receiving Query to our ML -->
+		<form action="{{ url_for('y_predict')}}" method="post">
+			<div class="split left">
+
+				<input type="number" name="Department" placeholder="Department" required="required" />
+				<input type="number" name="DistanceFromHome" placeholder="Distance From Home" required="required" />
+				<input type="number" name="EnvironmentSatisfaction" placeholder="Environment Satisfaction" required="required" />
+				<input type="number" name="JobInvolvement" placeholder="Job Involvement" required="required" />
+				<input type="number" name="JobSatisfaction" placeholder="Job Satisfaction" required="required" />
+				<input type="text" name="MaritalStatus" placeholder="Marital Status" required="required" />
+				<input type="number" name="NumCompaniesWorked" placeholder="Number of Companies Worked" required="required" />
+				<input type="number" name="OverTime " placeholder="Over Time " required="required" />
+             </div>
+			<div class="split right">
+				<input type="number" name="RelationshipSatisfaction" placeholder="Relationship Satisfaction" required="required" />
+				<input type="number" name="TotalWorkingYears" placeholder="Total Working Years" required="required" />
+				<input type="number" name="TrainingTimesLastYear" placeholder="Training Times LastYear" required="required" />
+				<input type="number" name="WorkLifeBalance" placeholder="Work Life Balance" required="required" />
+				<input type="number" name="YearsAtCompany" placeholder="Years At Company" required="required" />
+				<input type="number" name="YearsInCurrentRole" placeholder="Years In Current Role" required="required" />
+				<input type="number" name="YearsSinceLastPromotion" placeholder="Years Since Last Promotion" required="required" />
+				<input type="number" name="YearsWithCurrManager" placeholder="Years With Current Manager" required="required" />
+				<input type="number" name="Age" placeholder="Age" required="required" />
+				
+			</div>
+			<button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>	
+         </form>
+
+		<br>
+		<br>
+		{{ prediction_text }}
+
+	</div>
+
+
+</body>
+</html>
+
