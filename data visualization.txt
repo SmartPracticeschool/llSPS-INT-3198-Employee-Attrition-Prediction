@@ -1,0 +1,3 @@
+plt.figure(figsize=(14,14))
+#14in by 14in
+sns.heatmap(dataset.corr(),annot=True,fmt='.0%')
